@@ -3,18 +3,23 @@ const url = 'https://raw.githubusercontent.com/guilhermeonrails/api/main/dados-g
 async function vizualizarInformacoesGlobais() {
     const res = await fetch(url)
     const dados = await res.json()
-    const pessoasConectadas = (dados.total_pessoas_conectadas / 1e9)
-    const pessoasNoMundo = (dados.total_pessoas_mundo / 1e9)
-    const horas = parseInt(dados.tempo_medio)
-    const minutos = Math.round((dados.tempo_medio - horas) * 100)
-    const porcentagemConectada = ((pessoasConectadas / pessoasNoMundo ) * 100).toFixed(2)
 
+    // Substituindo dados fictícios da Barbie para ilustrar
+    const totalBonecasVendidas = 1.0 // Exemplo: 1 bilhão de bonecas Barbie vendidas ao longo dos anos
+    const pessoasFamiliarizadasComBarbie = 3.0 // Exemplo: 3 bilhões de pessoas já ouviram falar da Barbie
+    const horasInteragindoComBarbie = 0.25 // Exemplo: 15 minutos por dia
+    const minutosInteragindoComBarbie = 15 // Convertido para minutos
+
+    const porcentagemFamiliarizadaComBarbie = ((totalBonecasVendidas / pessoasFamiliarizadasComBarbie) * 100).toFixed(2)
+
+    // Criando o parágrafo com as informações
     const paragrafo = document.createElement('p')
     paragrafo.classList.add('graficos-container__texto')
-    paragrafo.innerHTML = `Você sabia que o mundo tem <span>${pessoasNoMundo} bilhões</span> de pessoas e que aproximadamente <span>${pessoasConectadas} bilhões</span> estão conectadas em alguma rede social e passam em média <span>${horas} horas</span> e <span>${minutos} minutos</span> conectadas.<br>Isso significa que aproximadamente <span>${porcentagemConectada}%</span> de pessoas estão conectadas em alguma rede social.`
+    paragrafo.innerHTML = `Você sabia que ao longo dos anos a Barbie já vendeu <span>${totalBonecasVendidas} bilhões</span> de bonecas, e aproximadamente <span>${pessoasFamiliarizadasComBarbie} bilhões</span> de pessoas conhecem a marca Barbie. Além disso, as pessoas interagem com a Barbie por uma média de <span>${horasInteragindoComBarbie} horas</span> ou <span>${minutosInteragindoComBarbie} minutos</span> por dia.<br>Isso significa que cerca de <span>${porcentagemFamiliarizadaComBarbie}%</span> das pessoas já ouviram falar da Barbie.`
 
     const container = document.getElementById('graficos-container')
     container.appendChild(paragrafo)
 }
 
 vizualizarInformacoesGlobais()
+

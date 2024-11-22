@@ -1,28 +1,32 @@
 import { getCSS, tickConfig } from "./common.js"
 
-async function quantidadeUsuariosPorRede() {
-    const url = 'https://raw.githubusercontent.com/guilhermeonrails/api/main/numero-usuarios.json'
+async function quantidadeColecoesPorRegiao() {
+    // Substituindo o URL para dados fictícios sobre coleções de bonecas Barbie por região
+    const url = 'https://raw.githubusercontent.com/guilhermeonrails/api/main/colecoes-barbie.json'
     const res = await fetch(url)
     const dados = await res.json()
-    const nomeDasRedes = Object.keys(dados)
-    const quantidadeDeUsuarios = Object.values(dados)
+    
+    // Ajustando para as chaves e valores do JSON hipotético
+    const nomeDasRegioes = Object.keys(dados)  // Exemplo: "EUA", "Europa", "Ásia", etc.
+    const quantidadeDeColecoes = Object.values(dados)  // Exemplo: [10, 8, 12], representando as coleções vendidas em bilhões por região
 
     const data = [
         {
-            x: nomeDasRedes, 
-            y: quantidadeDeUsuarios, 
+            x: nomeDasRegioes, 
+            y: quantidadeDeColecoes, 
             type: 'bar',
             marker: {
-                color: getCSS('--primary-color')
+                color: getCSS('--primary-color')  // Cor personalizada da Barbie
             }
         }
     ]
 
-    const laytout = {
+    // Layout com as cores e fontes definidas nas variáveis CSS
+    const layout = {
         plot_bgcolor: getCSS('--bg-color'),
         paper_bgcolor: getCSS('--bg-color'),
         title: {
-            text: 'Redes sociais com mais usuários',
+            text: 'Coleções de bonecas Barbie vendidas por região',
             x: 0,
             font: {
                 color: getCSS('--primary-color'),
@@ -33,7 +37,7 @@ async function quantidadeUsuariosPorRede() {
         xaxis: {
             tickfont: tickConfig,
             title: {
-                text: 'Nome das redes',
+                text: 'Região',
                 font: {
                     color: getCSS('--secondary-color')
                 }
@@ -42,7 +46,7 @@ async function quantidadeUsuariosPorRede() {
         yaxis: {
             tickfont: tickConfig,
             title: {
-                text: 'Bilhões de usuários ativos',
+                text: 'Bilhões de coleções vendidas',
                 font: {
                     color: getCSS('--secondary-color')
                 }
@@ -50,10 +54,13 @@ async function quantidadeUsuariosPorRede() {
         }
     }
 
+    // Criando o div para exibir o gráfico e adicionando ao container
     const grafico = document.createElement('div')
     grafico.className = 'grafico'
     document.getElementById('graficos-container').appendChild(grafico)
-    Plotly.newPlot(grafico, data, laytout)
+    
+    // Gerando o gráfico com Plotly
+    Plotly.newPlot(grafico, data, layout)
 }
 
-quantidadeUsuariosPorRede()
+quantidadeColecoesPorRegiao()
